@@ -1,1 +1,1 @@
-https://dklochana.github.io/TripNode/contact/
+https://dklochana.github.io/TripNode/
