@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TripNode — Legal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:       #0A84FF;
+      --blue-dim:   rgba(10,132,255,0.14);
+      --blue-glow:  rgba(10,132,255,0.28);
+      --blue-press: #0070E0;
+      --bg:         #000000;
+      --glass-1:    rgba(255,255,255,0.055);
+      --glass-2:    rgba(255,255,255,0.09);
+      --border:     rgba(255,255,255,0.09);
+      --border-lit: rgba(10,132,255,0.40);
+      --shine:      rgba(255,255,255,0.12);
+      --t1:         #FFFFFF;
+      --t2:         rgba(255,255,255,0.58);
+      --t3:         rgba(255,255,255,0.32);
+      --t4:         rgba(255,255,255,0.18);
+      --green:      #30D158;
+      --purple:     #BF5AF2;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--t1);
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* ─── AMBIENT BACKGROUND ─── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 90% 55% at 15% 5%,  rgba(10,132,255,0.13) 0%, transparent 65%),
+        radial-gradient(ellipse 70% 45% at 85% 85%, rgba(10,132,255,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 50% 50%, rgba(10,132,255,0.04) 0%, transparent 70%);
+    }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+      background-size: 56px 56px;
+      -webkit-mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, black 0%, transparent 100%);
+      mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, black 0%, transparent 100%);
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      height: 64px; padding: 0 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(28px) saturate(200%);
+      -webkit-backdrop-filter: blur(28px) saturate(200%);
+      border-bottom: 1px solid var(--border);
+      /* glass top sheen */
+      box-shadow: inset 0 1px 0 var(--shine), 0 1px 0 var(--border);
+    }
+
+    .nav-brand { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+
+    .nav-logo {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--blue);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 22px var(--blue-glow), inset 0 1px 0 rgba(255,255,255,0.25);
+    }
+
+    .nav-logo svg { width: 18px; height: 18px; color: #fff; }
+
+    .nav-name { font-size: 17px; font-weight: 700; letter-spacing: -0.4px; color: var(--t1); }
+
+    .nav-links { list-style: none; display: flex; gap: 2px; }
+
+    .nav-links a {
+      text-decoration: none; color: var(--t2);
+      font-size: 14px; font-weight: 500;
+      padding: 7px 14px; border-radius: 10px;
+      transition: color .15s, background .15s;
+    }
+
+    .nav-links a:hover { color: var(--t1); background: var(--glass-1); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative; z-index: 1;
+      padding: 110px 24px 80px;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+    }
+
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--blue-dim);
+      border: 1px solid rgba(10,132,255,0.25);
+      backdrop-filter: blur(12px);
+      border-radius: 100px; padding: 6px 16px;
+      font-size: 11px; font-weight: 700; letter-spacing: 1.3px; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 30px;
+    }
+
+    .hero-pill svg { width: 11px; height: 11px; }
+
+    .hero h1 {
+      font-size: clamp(44px, 8vw, 76px);
+      font-weight: 700; letter-spacing: -2.5px; line-height: 1.02;
+      background: linear-gradient(165deg, #fff 20%, rgba(255,255,255,0.48) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 20px;
+    }
+
+    .hero p { font-size: 18px; color: var(--t2); max-width: 460px; line-height: 1.7; }
+
+    /* ─── CARDS ─── */
+    .cards {
+      position: relative; z-index: 1;
+      max-width: 1020px; margin: 0 auto;
+      padding: 0 24px 110px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+
+    .card {
+      position: relative; overflow: hidden;
+      background: var(--glass-1);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px 28px 28px;
+      text-decoration: none;
+      display: flex; flex-direction: column; gap: 14px;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      transition: transform .28s cubic-bezier(.34,1.56,.64,1),
+                  border-color .2s, background .2s, box-shadow .25s;
+    }
+
+    /* top inner sheen */
+    .card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 55%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.07) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    /* top edge specular line */
+    .card::after {
+      content: '';
+      position: absolute; top: 0; left: 15%; right: 15%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.30), transparent);
+    }
+
+    .card:hover {
+      transform: translateY(-7px) scale(1.012);
+      background: var(--glass-2);
+      border-color: var(--border-lit);
+      box-shadow:
+        0 24px 64px rgba(0,0,0,0.55),
+        0 0 0 1px rgba(10,132,255,0.14),
+        inset 0 1px 0 rgba(255,255,255,0.13);
+    }
+
+    /* blue glow on hover */
+    .card:hover .card-glow {
+      opacity: 1;
+    }
+
+    .card-glow {
+      position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%);
+      width: 120px; height: 80px;
+      background: radial-gradient(ellipse, var(--blue-glow) 0%, transparent 70%);
+      pointer-events: none; opacity: 0;
+      transition: opacity .3s;
+    }
+
+    .icon-box {
+      width: 52px; height: 52px; border-radius: 15px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+
+    .icon-box::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.02) 100%);
+    }
+
+    .icon-box svg { width: 22px; height: 22px; position: relative; z-index: 1; }
+
+    .icon-box.b { background: var(--blue-dim);            border: 1px solid rgba(10,132,255,0.22); }
+    .icon-box.b svg { color: var(--blue); }
+    .icon-box.g { background: rgba(48,209,88,0.11);       border: 1px solid rgba(48,209,88,0.22); }
+    .icon-box.g svg { color: var(--green); }
+    .icon-box.p { background: rgba(191,90,242,0.11);      border: 1px solid rgba(191,90,242,0.22); }
+    .icon-box.p svg { color: var(--purple); }
+
+    .card-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: 1.2px;
+      text-transform: uppercase; color: var(--t3);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .card h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.4px; color: var(--t1); }
+
+    .card p { font-size: 14px; color: var(--t2); line-height: 1.65; flex: 1; }
+
+    .card-link {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 14px; font-weight: 600; color: var(--blue);
+    }
+
+    .card-link svg { width: 14px; height: 14px; transition: transform .2s; }
+    .card:hover .card-link svg { transform: translateX(5px); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      position: relative; z-index: 1;
+      text-align: center; padding: 32px 24px;
+      font-size: 13px; color: var(--t3);
+      background: rgba(255,255,255,0.025);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+    }
+
+    footer a { color: var(--blue); text-decoration: none; }
+    footer strong { color: var(--t2); }
+
+    @media (max-width: 800px) {
+      .cards { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      nav {
+        height: auto;
+        min-height: 64px;
+        padding: 10px 14px;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .nav-links {
+        display: flex;
+        width: 100%;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .nav-links::-webkit-scrollbar { display: none; }
+
+      .nav-links a {
+        flex: 0 0 auto;
+        white-space: nowrap;
+        padding: 8px 12px;
+        font-size: 13px;
+        background: var(--glass-1);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="." class="nav-brand">
+      <div class="nav-logo">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M3 11L22 2L13 21L11 13L3 11Z"/>
+        </svg>
+      </div>
+      <span class="nav-name">TripNode</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="privacy-policy/">Privacy Policy</a></li>
+      <li><a href="terms-of-service/">Terms of Service</a></li>
+      <li><a href="contact/">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-pill">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 18a8 8 0 110-16 8 8 0 010 16zm-1-5h2v2h-2zm0-8h2v6h-2z"/></svg>
+        TripNode
+      </div>
+      <h1>Legal &amp; Support</h1>
+      <p>Everything you need to know about your rights, our policies, and how to reach us.</p>
+    </section>
+
+    <div class="cards">
+
+      <a href="privacy-policy/" class="card">
+        <div class="card-glow"></div>
+        <div class="icon-box b">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div class="card-tag">Legal</div>
+        <h2>Privacy Policy</h2>
+        <p>How we collect, use, and protect your personal information when you use TripNode.</p>
+        <span class="card-link">Read
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+
+      <a href="terms-of-service/" class="card">
+        <div class="card-glow"></div>
+        <div class="icon-box g">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <line x1="10" y1="9" x2="8" y2="9"/>
+          </svg>
+        </div>
+        <div class="card-tag">Legal</div>
+        <h2>Terms of Service</h2>
+        <p>The rules and agreements that govern your use of TripNode and its AI travel features.</p>
+        <span class="card-link">Read
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+
+      <a href="contact/" class="card">
+        <div class="card-glow"></div>
+        <div class="icon-box p">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </div>
+        <div class="card-tag">Support</div>
+        <h2>Contact Us</h2>
+        <p>Have a question or need help? We'd love to hear from you about your trip.</p>
+        <span class="card-link">Get in touch
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+
+    </div>
+  </main>
+
+  <footer>
+    © 2026 <strong>TripNode</strong> · All rights reserved · <a href="mailto:support@tripnode.app">support@tripnode.app</a>
+  </footer>
+
+</body>
+</html>
